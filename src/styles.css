@@ -1,0 +1,82 @@
+body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: darkslateblue;
+  background-color: aliceblue;
+}
+
+header.app-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+header.app-header h1::first-letter {
+  font-size: 2.5rem;
+  color: orange;
+}
+
+section.container {
+  max-width: 500px;
+  padding: 20px 12px 10px 20px;
+  font: 13px Arial, Helvetica, sans-serif;
+}
+
+section.container header {
+  font-weight: bold;
+  font-style: italic;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 20px;
+  font-size: .9rem;
+  padding-bottom: 3px;
+}
+
+.ebook-form label {
+  display: block;
+  margin: 0 0 15px 0;
+}
+
+.ebook-form label > span {
+  width: 100px;
+  font-weight: bold;
+  float: left;
+  padding-top: 8px;
+  padding-right: 5px;
+}
+
+.ebook-form span.required {
+  color: red;
+}
+
+.ebook-form input[type=text],
+.ebook-form textarea {
+  width: 48%;
+  box-sizing: border-box;
+  border: 1px solid #c2c2c2;
+  box-shadow: 1px 1px 4px #ebebeb;
+  border-radius: 3px;
+  padding: 7px;
+  outline: none;
+}
+
+.ebook-form input[type=text]:focus,
+.ebook-form textarea:focus {
+  border: 1px solid #0c0;
+}
+
+.ebook-form textarea {
+  height: 100%;
+}
+
+.ebook-form input[type=submit] {
+  border: none;
+  padding: 8px 15px;
+  background: #ff8500;
+  color: white;
+  box-shadow: 1px 1px 4px #dadada;
+  border-radius: 3px;
+  cursor: pointer;
+
+}
+
+.ebook-form input[type=submit]:hover {
+  background: #ea7b00;
+} 

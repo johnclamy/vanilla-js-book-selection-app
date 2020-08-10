@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Study Guide - Must read free ebooks</title>
+	<meta charset="UTF-8" />
+</head>
+
+<body>
+	<div id="app">
+		<header class="app-header">
+			<h1>eBook Selection</h1>
+		</header>
+		<main>
+			<section class="container">
+				<header>Select a Favourite eBook</header>
+				<form class="ebook-form">
+					<label for="title-input">
+						<span>Title <span class="required">*</span></span>
+						<input type="text" name="title-input" id="title-input" class="title-input">
+					</label>
+					<label for="short-descr-input">
+						<span>Short Description <span class="required">*</span></span>
+						<textarea name="short-descr-input" id="short-descr-input" class="short-descr-input"></textarea>
+					</label>
+					<label>
+						<span> </span>
+						<input id="submit-ebook" type="submit" value="ADD">
+					</label>
+				</form>
+			</section>
+			<section class="container">
+					<header class="eBook-list-header">My eBooks to Read</header>
+					<ul class="ebook-list"></ul>
+					<footer class="stats">
+						<p class="ebook-count"></p>
+						<p class="completed-read"></p>
+						<p class="still-to-read"></p>
+					</footer>
+			</section>
+		</main>
+	</div>
+
+	<script src="src/index.js">
+	</script>
+</body>
+
+</html>
