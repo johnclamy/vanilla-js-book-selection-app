@@ -1,26 +1,25 @@
-import Model from './model'
+import Model from "./model";
 
 const View = {
-  $eBookList: document.querySelector('.ebook-list'),
-  $ebookCount: document.querySelector('.ebook-count'),
-  $completedRead: document.querySelector('.completed-read'),
-  $stillToRead: document.querySelector('.still-to-read'),
+  $eBookList: document.querySelector(".ebook-list"),
+  $ebookCount: document.querySelector(".ebook-count"),
+  $completedRead: document.querySelector(".completed-read"),
+  $stillToRead: document.querySelector(".still-to-read"),
 
-  displayBookList () {
-    Model.initalTodos.forEach(todo => {
-      this.$eBookList.appendChild(this.createMenuItem(todo))
-
-    })
+  displayBookList() {
+    Model.initialBooks.forEach((book) => {
+      this.$eBookList.appendChild(this.createMenuItem(book));
+    });
   },
-  createMenuItem (content) {
-    const $listItem = document.createElement('li')
-    $listItem.textContent = content.title
-    return $listItem
+  createMenuItem(content) {
+    const $listItem = document.createElement("li");
+    $listItem.textContent = content.title;
+    return $listItem;
   },
 
-  displayBookCount () {},
-  displayCompletedRead () {},
-  displayStillToRead () {}
-}
+  displayBookCount() {},
+  displayCompletedRead() {},
+  displayStillToRead() {}
+};
 
-export default View
+export default View;

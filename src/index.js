@@ -1,6 +1,8 @@
 import "./styles.css";
 import View from './scripts/view'
 
-const $todoList = document.querySelector('.eBook-list-header')
+function init () {
+  View.displayBookList()
+}
 
-$todoList.insertAdjacentHTML('afterend', View.displayBookList())
+window.onload = init

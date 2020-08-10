@@ -1,16 +1,14 @@
-import initialData from '../data/initial-data'
+import initialData from "../data/initial-data";
 
 const Model = {
-  initalTodos: initialData,
+  initialBooks: initialData,
   eBookCount: initialData.length,
   completedRead: 0,
-  stillToRead () {
-    return (
-      !this.completedRead
-        ? this.eBookCount
-        : (this.eBookCount - this.completedRead)
-    )
+  stillToRead() {
+    return !this.completedRead
+      ? this.eBookCount
+      : this.eBookCount - this.completedRead;
   }
-}
+};
 
-export default Model
+export default Model;
