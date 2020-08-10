@@ -1,8 +1,9 @@
 import "./styles.css";
-import View from './scripts/view'
+import View from "./scripts/view";
+import Model from "./scripts/model";
 
-function init () {
-  View.displayBookList()
-}
+const $eBookList = document.querySelector(".ebook-list");
 
-window.onload = init
+Model.initialBooks.forEach((book) => {
+  $eBookList.appendChild(View.createMenuItem(book));
+});
