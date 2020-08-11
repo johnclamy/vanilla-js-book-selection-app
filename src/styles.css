@@ -79,4 +79,20 @@ section.container header {
 
 .ebook-form input[type=submit]:hover {
   background: #ea7b00;
-} 
+}
+
+.ebook-list {
+  list-style-type: none;
+  padding: 20px;
+  background-color: white;
+}
+
+.ebook-list li {
+  line-height: 30px;
+}
+
+footer.stats {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2.5rem 0;
+}
