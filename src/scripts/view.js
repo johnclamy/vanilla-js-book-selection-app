@@ -1,15 +1,14 @@
 const View = {
+  $ebookList: document.querySelector('.ebook-list'),
   $ebookCount: document.querySelector(".ebook-count"),
   $completedRead: document.querySelector(".completed-read"),
   $stillToRead: document.querySelector(".still-to-read"),
 
-  createListItem(content) {
-    const $listItem = document.createElement("li");
-    $listItem.textContent = content.title;
-    return $listItem;
+  createListItem (content) {
+    const $listItem = document.createElement("li")
+    $listItem.textContent = content.title
+    return $listItem
   },
-
-  clearDisplayList () {},
 
   displayListItems (listItems) {
     const $listItems = listItems.map(item =>
@@ -27,22 +26,34 @@ const View = {
     element.style.textAlign = 'center'
   },
 
-  displayBookCount(count) {
+  clearBookList (list) {
+    while (list.firstChild) {
+      list.removeChild(list.firstChild)
+    }
+  },
+
+  displayBookCount (count) {
     const text = `Total books ${count}`
     this.$ebookCount.textContent = text
     this.setStyle(this.$ebookCount, 'MediumBlue')
   },
 
-  displayCompletedRead(completedCount) {
+  displayCompletedRead (completedCount) {
     const text = `Completed ${completedCount}`
     this.$completedRead.textContent = text
     this.setStyle(this.$completedRead, 'Crimson')
   },
 
-  displayStillToRead(toReadCount) {
+  displayStillToRead (toReadCount) {
     const text = `Still to read ${toReadCount}`
     this.$stillToRead.textContent = text
     this.setStyle(this.$stillToRead, 'ForestGreen')
+  },
+
+  displayStats (stats) {
+    this.displayBookCount(stats.eBookCount)
+    this.displayCompletedRead(stats.completedRead)
+    this.displayStillToRead(stats.stillToRead())
   }
 }
 

@@ -5,29 +5,50 @@ import './styles.css'
 window.onload = init
 
 function init () {
+  const $addBookBtn = document.querySelector('#btn-add-ebook')
   const $eBookList = document.querySelector('.ebook-list')
-  const $addBookBtn = document.querySelector('#submit-ebook')
 
   $addBookBtn.addEventListener('click', handleAddBook)
 
   updateBookList()
+  View.displayStats(Model)
 
-  View.displayBookCount(Model.eBookCount)
-  View.displayCompletedRead(Model.completedRead)
-  View.displayStillToRead(Model.stillToRead())
-
-  function updateBookList () {
+  // Display content to the UL (List of books)
+  function updateBookList () {   
     const eBookItems = View.displayListItems(Model.eBooks)
-    eBookItems.length && eBookItems.forEach(item => $eBookList.append(item))
+
+    if (eBookItems.length) {
+      eBookItems.forEach(item => $eBookList.append(item))
+    } else {
+      const MESSAGE = 'You currently have no books to read.'
+      const $message = document.createElement('p')
+
+      $message.textContent = MESSAGE
+      $message.style.backgroundColor = 'LightYellow'
+      $message.style.padding = '20px'
+      $message.style.textAlign = 'center'
+      $message.style.fontSize = '1.2rem'
+      $message.style.fontWeight = 'bold'
+      $message.style.color = 'DarkOrange'
+
+      $eBookList.style.display = 'none'
+      $eBookList.insertAdjacentHTML($message)
+    }
   }
 
-  function handleAddBook (e) {
+  // Save input data to state property and render the
+  // list when ADD button is clicked
+  function handleAddBook () {
     const $title = document.querySelector('#title-input')
-    const $descr = document.querySelector('#short-descr-input')    
-    const book = { title: $title.value, shortDesr: $descr.value }
+    const $shortDesr = document.querySelector('#short-desr-input')    
+    const book = { title: $title.value, shortDesr: $shortDesr.value }
+
+    $title.value = ''
+    $shortDesr.value = ''
 
     Model.addEbook(book)
+    View.clearBookList($eBookList)
+    View.displayStats(Model)
     updateBookList()
-    e.preventDefault()
   }
 }
