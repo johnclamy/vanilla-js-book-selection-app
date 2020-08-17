@@ -2,13 +2,14 @@ import View from './scripts/view'
 import Model from './scripts/model'
 import './styles.css'
 
-window.onload = init
+window.addEventListener('load', init)
 
 function init () {
   const $addBookBtn = document.querySelector('#btn-add-ebook')
   const $eBookList = document.querySelector('.ebook-list')
 
   $addBookBtn.addEventListener('click', handleAddBook)
+  
 
   updateBookList()
   View.displayStats(Model)
@@ -18,7 +19,10 @@ function init () {
     const eBookItems = View.displayListItems(Model.eBooks)
 
     if (eBookItems.length) {
-      eBookItems.forEach(item => $eBookList.append(item))
+      eBookItems.forEach(item => {
+        item.addEventListener('click', handleMarkAsRead)
+        $eBookList.append(item)
+      })
     } else {
       const MESSAGE = 'You currently have no books to read.'
       const $message = document.createElement('p')
@@ -50,5 +54,16 @@ function init () {
     View.clearBookList($eBookList)
     View.displayStats(Model)
     updateBookList()
+  }
+
+  function handleMarkAsRead () {
+    Model.toggleEbookComplete()
+    View.displayToggleCompleteBookRead(this, Model.isCompleted)
+    View.displayStats(Model)
+    this.append(View.displayRemoveBtn())   
+  }
+
+  function handleDeleteBook () {
+
   }
 }

@@ -7,6 +7,9 @@ const View = {
   createListItem (content) {
     const $listItem = document.createElement("li")
     $listItem.textContent = content.title
+    $listItem.setAttribute('id', content.id)
+    $listItem.setAttribute('title', content.shortDesr)
+    $listItem.style.cursor = 'pointer'
     return $listItem
   },
 
@@ -54,6 +57,29 @@ const View = {
     this.displayBookCount(stats.eBookCount)
     this.displayCompletedRead(stats.completedRead)
     this.displayStillToRead(stats.stillToRead())
+  },
+
+  displayRemoveBtn (delClickHandler) {
+    const $removeBtn = document.createElement('button')
+    $removeBtn.addEventListener('click', delClickHandler)
+    $removeBtn.textContent = 'x'
+    $removeBtn.style.color = 'red'
+    $removeBtn.style.backgroundColor = 'aliceblue'
+    $removeBtn.style.fontWeight = 'bold'
+    $removeBtn.style.cssFloat = 'right'
+    $removeBtn.style.cursor = 'pointer'
+    $removeBtn.style.borderColor = 'aliceblue'
+    $removeBtn.style.borderRadius = '50%'
+    $removeBtn.setAttribute('title', 'Delete book')
+    return $removeBtn
+  },
+
+  displayToggleCompleteBookRead (element, isComplete) {
+    if (isComplete) {
+      element.style.textDecoration = 'line-through'
+    } else {
+      element.style.textDecoration = 'none'
+    }
   }
 }
 
