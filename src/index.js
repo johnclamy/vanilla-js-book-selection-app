@@ -1,48 +1,20 @@
-import View from './scripts/view'
-import Model from './scripts/model'
+import View from './scripts/View'
+import Book from './scripts/Book'
 import './styles.css'
 
 window.addEventListener('load', init)
 
 function init () {
-  const $addBookBtn = document.querySelector('#btn-add-ebook')
-  const $eBookList = document.querySelector('.ebook-list')
+  const $books = document.querySelector('.ebook-list')
+  const $addBtn = document.querySelector('#btn-add-ebook')
 
-  $addBookBtn.addEventListener('click', handleAddBook)
-  
+  $addBtn.addEventListener('click', handleAddButton)
 
-  updateBookList()
-  View.displayStats(Model)
+  render()
 
-  // Display content to the UL (List of books)
-  function updateBookList () {   
-    const eBookItems = View.displayListItems(Model.eBooks)
-
-    if (eBookItems.length) {
-      eBookItems.forEach(item => {
-        item.addEventListener('click', handleMarkAsRead)
-        $eBookList.append(item)
-      })
-    } else {
-      const MESSAGE = 'You currently have no books to read.'
-      const $message = document.createElement('p')
-
-      $message.textContent = MESSAGE
-      $message.style.backgroundColor = 'LightYellow'
-      $message.style.padding = '20px'
-      $message.style.textAlign = 'center'
-      $message.style.fontSize = '1.2rem'
-      $message.style.fontWeight = 'bold'
-      $message.style.color = 'DarkOrange'
-
-      $eBookList.style.display = 'none'
-      $eBookList.insertAdjacentHTML($message)
-    }
-  }
-
-  // Save input data to state property and render the
-  // list when ADD button is clicked
-  function handleAddBook () {
+  /* Save input data to state property and render the
+     page content when ADD button is clicked */
+  function handleAddButton () {
     const $title = document.querySelector('#title-input')
     const $shortDesr = document.querySelector('#short-desr-input')    
     const book = { title: $title.value, shortDesr: $shortDesr.value }
@@ -50,20 +22,43 @@ function init () {
     $title.value = ''
     $shortDesr.value = ''
 
-    Model.addEbook(book)
-    View.clearBookList($eBookList)
-    View.displayStats(Model)
-    updateBookList()
+    Book.add(book)
+    render()
   }
+ 
+  function renderList () {
+    const books = View.listItems(Book.books)
 
-  function handleMarkAsRead () {
-    Model.toggleEbookComplete()
-    View.displayToggleCompleteBookRead(this, Model.isCompleted)
-    View.displayStats(Model)
-    this.append(View.displayRemoveBtn())   
+    if (!books.length) {
+      View.clearList($books)
+      View.renderEmptyList($books)
+      Book.resetStats()
+    } else {
+      View.clearList($books)
+      books.forEach(book => {
+        book.onclick = () => {
+          book.append(View.renderRemoveBtn())
+          if (!Book.isCompleted) {
+            const $delBtn = document.querySelector('#del-btn')
+            const handleDelButton = () => {
+              Book.removeBy(book.id)
+              render()
+            }
+            book.firstChild.style.textDecoration = 'line-through'
+            $delBtn.addEventListener('click', handleDelButton)
+            Book.setRead()
+          }
+          book.onclick = null
+          View.renderStats(Book)
+          Book.isCompleted = false
+        }
+        $books.append(book)
+      })
+    }    
   }
-
-  function handleDeleteBook () {
-
+  
+  function render () {
+    renderList()
+    View.renderStats(Book)
   }
 }
